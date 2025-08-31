@@ -14,23 +14,7 @@ DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT")  # your model deployment 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    response_text = None
-    if request.method == "POST":
-        user_input = request.form["message"]
-
-        response = openai.ChatCompletion.create(
-            engine=DEPLOYMENT_NAME,
-            messages=[
-                {"role": "system", "content": "You are a helpful chatbot."},
-                {"role": "user", "content": user_input}
-            ],
-            max_tokens=200
-        )
-
-        response_text = response["choices"][0]["message"]["content"]
-
-    return render_template("index.html", response=response_text)
-
-
+    # 🔍 Debug: return raw text to confirm Flask response works
+    return "<h1>Hello from Azure Flask Chatbot 🚀</h1>"
 if __name__ == "__main__":
     app.run(debug=True)
